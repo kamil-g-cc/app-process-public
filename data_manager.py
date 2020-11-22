@@ -21,6 +21,7 @@ def get_mentors_by_last_name(cursor: RealDictCursor, last_name: str) -> list:
     query = """
         SELECT first_name, last_name, city
         FROM mentor
+        WHERE last_name = %(last_name)s
         ORDER BY first_name"""
-    cursor.execute(query)
+    cursor.execute(query, {'last_name': last_name})
     return cursor.fetchall()
