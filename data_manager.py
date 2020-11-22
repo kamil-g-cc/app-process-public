@@ -36,6 +36,15 @@ def get_mentors_by_city(cursor: RealDictCursor, city: str) -> list:
     return cursor.fetchall()
 
 @database_common.connection_handler
+def get_applicant_data_by_name(cursor: RealDictCursor, first_name: str) -> list:
+    query = """
+        SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number
+        FROM applicant
+        WHERE first_name = %(first_name)s;"""
+    cursor.execute(query, {'first_name': first_name})
+    return cursor.fetchall()
+
+@database_common.connection_handler
 def get_citites(cursor: RealDictCursor) -> list:
     query = """
         SELECT DISTINCT city from mentor;
