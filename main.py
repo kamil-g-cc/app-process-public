@@ -13,7 +13,7 @@ def index():
 @app.route('/mentors')
 def mentors_list():
     mentor_name = request.args.get('mentor-last-name')
-
+    cities = data_manager.get_citites()
     if mentor_name:
         mentor_details = data_manager.get_mentors_by_last_name(mentor_name)
     else:
@@ -21,7 +21,7 @@ def mentors_list():
 
     # We get back a list of dictionaries from the data_manager (for details check 'data_manager.py')
 
-    return render_template('mentors.html', mentors=mentor_details)
+    return render_template('mentors.html', mentors=mentor_details, cities=cities)
 
 
 if __name__ == '__main__':
