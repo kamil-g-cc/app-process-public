@@ -25,3 +25,11 @@ def get_mentors_by_last_name(cursor: RealDictCursor, last_name: str) -> list:
         ORDER BY first_name"""
     cursor.execute(query, {'last_name': last_name})
     return cursor.fetchall()
+
+@database_common.connection_handler
+def get_citites(cursor: RealDictCursor) -> list:
+    query = """
+        SELECT DISTINCT city from mentor;
+    """
+    cursor.execute(query)
+    return cursor.fetchall()
